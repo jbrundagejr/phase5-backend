@@ -1,9 +1,6 @@
 Rails.application.routes.draw do
-  resources :messages
-  resources :conversations
-  resources :flavors
-  resources :reviews
-  resources :shops
-  resources :users
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+  resources :shops, only: [:index]
+  resources :reviews, only: [:index]
+  resources :users, only: [:index, :show]
+  post '/login', to: "users#login"
 end
