@@ -5,4 +5,5 @@ class User < ApplicationRecord
   has_many :messages, dependent: :delete_all
   has_many :sent_conversations, class_name: 'Conversation', foreign_key: :sender_id
   has_many :received_conversations, class_name: 'Conversation', foreign_key: :recipient_id
+  validates_uniqueness_of :email
 end

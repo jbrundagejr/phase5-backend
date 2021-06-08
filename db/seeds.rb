@@ -161,9 +161,15 @@ end
 
 puts "Creating Messages..."
 
-20.times do
+10.times do
   Message.create(content: Faker::Lorem.sentence,
-                 user: User.all.sample,
+                 user_id: Conversation.sender_ids.sample,
+                 conversation: Conversation.all.sample)
+end
+
+10.times do
+  Message.create(content: Faker::Lorem.sentence,
+                 user_id: Conversation.recipient_ids.sample,
                  conversation: Conversation.all.sample)
 end
 

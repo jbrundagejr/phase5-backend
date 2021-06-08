@@ -1,7 +1,8 @@
 class UsersController < ApplicationController
 
-  skip_before_action :logged_in?, only: [:login, :create]
+  # skip_before_action :logged_in?, only: [:login, :create]
   before_action :find_user, only: [:show]
+  before_action :authorized, only: [:keep_logged_in]
 
   def login
     @user = User.find_by(email: params[:email])
@@ -15,6 +16,20 @@ class UsersController < ApplicationController
       render json: {error: "Incorrect Email or Password."}, status: 422
     end
   end
+
+  def create
+    @user = User.create(user_params)
+    if @user.valid?
+      user_token = encode_token({user_id: @user.id})
+      render json: {
+        user: UserSerializer.new(@user),
+        token: user_token
+      }
+    else
+      render json: {error: "Unable to create profile."}, status: 422
+    end
+      
+  end
   
   def index
     @users = User.all
@@ -24,13 +39,12 @@ class UsersController < ApplicationController
   def show
   end
 
-  def create
-    @user = User.create(user_params)
+  def keep_logged_in
     user_token = encode_token({user_id: @user.id})
-    render json: {
-      username: UserSerializer.new(@user), 
-      token: user_token
-    }
+      render json: {
+        user: UserSerializer.new(@user),
+        token: user_token
+      }
   end
 
   private
