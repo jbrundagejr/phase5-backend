@@ -8,7 +8,7 @@ Conversation.destroy_all
 puts "Creating Users..."
 
 20.times do |i|
-  User.create(username: Faker::Name.name,
+  User.create(username: Faker::Internet.username,
               email: Faker::Internet.email,
               password: "123", 
               profile_img: "https://i.pravatar.cc/150?img=#{i+1}")
