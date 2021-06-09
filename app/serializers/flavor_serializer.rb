@@ -1,4 +1,5 @@
 class FlavorSerializer < ActiveModel::Serializer
   attributes :id, :name, :description, :image_url
-  has_one :shop
+  belongs_to :shop
+  has_many :flavor_reviews
 end

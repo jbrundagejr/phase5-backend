@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
 
   # skip_before_action :logged_in?, only: [:login, :create]
-  before_action :find_user, only: [:show]
+  before_action :find_user, only: [:show, :destroy]
   before_action :authorized, only: [:keep_logged_in]
 
   def login
@@ -45,6 +45,12 @@ class UsersController < ApplicationController
         user: UserSerializer.new(@user),
         token: user_token
       }
+  end
+
+  def destroy
+    render json: @user
+    @user.destroy
+
   end
 
   private

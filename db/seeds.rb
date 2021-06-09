@@ -3,6 +3,7 @@ Shop.destroy_all
 Review.destroy_all
 Flavor.destroy_all
 Message.destroy_all
+FlavorReview.destroy_all
 Conversation.destroy_all
 
 puts "Creating Users..."
@@ -148,6 +149,15 @@ Flavor.create(name: "Red Chili Chocolate",
                       description: "Rich chocolate ice cream with heirloom chilies.",
                       image_url: "https://i.imgur.com/eODZA92.png",
                       shop_id: shop6.id)
+
+puts "Creating Flavor Reviews..."
+
+15.times do
+  FlavorReview.create(content: Faker::Lorem.sentence,
+                      rating: rand(1..5),
+                      user: User.all.sample,
+                      flavor: Flavor.all.sample)
+end
 
 puts "Creating Conversations..."
 
