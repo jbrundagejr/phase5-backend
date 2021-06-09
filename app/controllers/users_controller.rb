@@ -1,8 +1,7 @@
 class UsersController < ApplicationController
-
-  # skip_before_action :logged_in?, only: [:login, :create]
-  before_action :find_user, only: [:show, :destroy]
-  before_action :authorized, only: [:keep_logged_in]
+  
+  before_action :find_user, only: [:show, :destroy, :update]
+  before_action :authorized, only: [:keep_logged_in, :destroy, :update]
 
   def login
     @user = User.find_by(email: params[:email])
@@ -28,7 +27,6 @@ class UsersController < ApplicationController
     else
       render json: {error: "Unable to create profile."}, status: 422
     end
-      
   end
   
   def index
@@ -48,9 +46,18 @@ class UsersController < ApplicationController
   end
 
   def destroy
-    render json: @user
     @user.destroy
+  end
 
+  def update
+    @user = User.update(user_params)
+    if @user.valid?
+      render json: {
+        user: UserSerializer.new(@user)
+      }
+    else
+      render json: {error: "Unable to create profile."}, status: 422
+    end
   end
 
   private

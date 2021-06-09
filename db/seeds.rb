@@ -152,7 +152,7 @@ Flavor.create(name: "Red Chili Chocolate",
 
 puts "Creating Flavor Reviews..."
 
-15.times do
+30.times do
   FlavorReview.create(content: Faker::Lorem.sentence,
                       rating: rand(1..5),
                       user: User.all.sample,
