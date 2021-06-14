@@ -1,16 +1,14 @@
 class FlavorReviewsController < ApplicationController
 
-  before_action :find_flavor_review, only: [:show, :destroy]
-
-  def show
-  end
+  before_action :authorized, only: [:create, :destroy]
 
   def create
-    @flavor_review = FlavorReview.create(flavor_review_params)
-    render json: @flavor_reviews
+    @flavor_review = @user.flavor_reviews.create(flavor_review_params)
+    render json: @flavor_review
   end
 
   def destroy
+    @flavor_review = FlavorReview.find(params[:id])
     render json: @flavor_review
     @flavor_review.destroy
   end

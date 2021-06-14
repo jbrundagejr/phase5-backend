@@ -1,6 +1,4 @@
 class FlavorsController < ApplicationController
-
-  before_action :find_flavor, only: [:show]
   
   def index
     @flavors = Flavor.all
@@ -8,11 +6,6 @@ class FlavorsController < ApplicationController
   end
 
   def show
-  end
-  
-  private
-
-  def find_flavor
     @flavor = Flavor.find(params[:id])
     render json: @flavor
   end

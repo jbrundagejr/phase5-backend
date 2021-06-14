@@ -4,5 +4,5 @@ Rails.application.routes.draw do
   resources :users, only: [:index, :show, :update, :create, :destroy]
   resources :flavors, only: [:index, :show]
   resources :shops, only: [:index, :show]
-  resources :flavor_reviews, only: [:show, :create, :destroy]
+  resources :flavor_reviews, only: [:create, :destroy]
 end

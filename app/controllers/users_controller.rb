@@ -1,6 +1,5 @@
 class UsersController < ApplicationController
   
-  before_action :find_user, only: [:show, :destroy, :update]
   before_action :authorized, only: [:keep_logged_in, :destroy, :update]
 
   def login
@@ -31,10 +30,17 @@ class UsersController < ApplicationController
   
   def index
     @users = User.all
+    # user_array = @users.map do |user_instance|
+    #     { user: UserSerializer.new(user_instance),
+    #     token: encode_token({user_id: user_instance.id})}
+    # end
+    # render json: user_array
     render json: @users
   end
 
   def show
+    @user = User.find(params[:id])
+    render json: @user
   end
 
   def keep_logged_in
@@ -46,11 +52,13 @@ class UsersController < ApplicationController
   end
 
   def destroy
+    @user = User.find(params[:id])
     @user.destroy
   end
 
   def update
-    @user = User.update(user_params)
+    @user = User.find(params[:id])
+    @user.update(user_params)
     if @user.valid?
       render json: {
         user: UserSerializer.new(@user)
@@ -61,11 +69,6 @@ class UsersController < ApplicationController
   end
 
   private
-
-  def find_user
-    @user = User.find(params[:id])
-    render json: @user
-  end
 
   def user_params
     params.permit(:username, :email, :password, :profile_img)
