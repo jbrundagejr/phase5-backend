@@ -8,12 +8,30 @@ Conversation.destroy_all
 
 puts "Creating Users..."
 
-20.times do |i|
-  User.create(username: Faker::Internet.username,
-              email: Faker::Internet.email,
+User.create(username: "Albus Dumbledore",
+              email: "dumbledore@hogwarts.edu",
               password: "123", 
-              profile_img: "https://i.pravatar.cc/150?img=#{i+1}")
-end
+              profile_img: "https://i.imgur.com/UYYZ0nQ.jpg")
+User.create(username: "Miles Morales",
+              email: "spiderwho@gsnail.com",
+              password: "123", 
+              profile_img: "https://i.imgur.com/zhGH2hc.jpg")
+User.create(username: "Daria Morgendorffer",
+              email: "ugh@daria.com",
+              password: "123", 
+              profile_img: "https://i.imgur.com/vBbpM8K.jpg")
+User.create(username: "Ahsoka Tano",
+              email: "notajedi@jedis.org",
+              password: "123", 
+              profile_img: "https://i.imgur.com/aE1u5o4.jpg")
+User.create(username: "Kal El",
+              email: "dontworryaboutit@justiceleague.org",
+              password: "123", 
+              profile_img: "https://i.imgur.com/YQUrkjO.png")
+User.create(username: "Buffy Summers",
+              email: "ihatesunnydale@hellmouth.come",
+              password: "123", 
+              profile_img: "https://i.imgur.com/Z2Ume6T.jpg")
 
 puts "Creating Ice Cream Shops..."
 

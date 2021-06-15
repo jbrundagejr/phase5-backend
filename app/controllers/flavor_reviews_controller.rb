@@ -19,9 +19,4 @@ class FlavorReviewsController < ApplicationController
     params.permit(:content, :rating, :flavor_id)
   end
 
-  def find_flavor_review
-    @flavor_review = FlavorReview.find(params[:id])
-    render json: @flavor_review
-  end
-
 end
