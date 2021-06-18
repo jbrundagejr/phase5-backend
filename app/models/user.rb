@@ -9,19 +9,29 @@ class User < ApplicationRecord
   has_many :received_conversations, class_name: 'Conversation', foreign_key: :recipient_id
   validates_uniqueness_of :email
 
-  # def all_convos
-  #   all_convos = []
-  #   sent_convos = self.sent_conversations.map do |sent_convo|
-  #     recipient = User.find_by(sent_convo.recipient_id)
-  #     recipient.username
-  #   end
-  #   all_convos << sent_convos
-
-  #   received_convos = self.received_conversations.map do |received_convo|
-  #     received_convo.
-  #   end
-  #   all_convos << received_convos
-  #   all_convos
-  # end
+  def all_convos
+    all_convos = []
+    self.sent_conversations.each do |sent_convo|
+      data = {
+        sent_convo: sent_convo,
+        sender_username: User.find(sent_convo.sender_id).username,
+        sender_profile_img: User.find(sent_convo.sender_id).profile_img,
+        recipient_username: User.find(sent_convo.recipient_id).username,
+        recipient_profile_img: User.find(sent_convo.recipient_id).profile_img
+      }
+      all_convos << data
+    end
+    self.received_conversations.each do |received_convo|
+      data = {
+        received_convo: received_convo,
+        sender_username: User.find(received_convo.sender_id).username,
+        sender_profile_img: User.find(received_convo.sender_id).profile_img,
+        recipient_username: User.find(received_convo.recipient_id).username,
+        recipient_profile_img: User.find(received_convo.recipient_id).profile_img
+      }
+      all_convos << data
+    end
+    all_convos
+  end
 
 end

@@ -6,5 +6,6 @@ Rails.application.routes.draw do
   resources :shops, only: [:index, :show]
   resources :reviews, only: [:create, :destroy]
   resources :flavor_reviews, only: [:create, :destroy]
-  resources :conversations, only: [:index]
+  resources :conversations, only: [:index, :show, :create]
+  resources :messages, only: [:create, :destroy]
 end
