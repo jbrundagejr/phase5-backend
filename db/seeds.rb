@@ -8,27 +8,27 @@ Conversation.destroy_all
 
 puts "Creating Users..."
 
-User.create(username: "Albus Dumbledore",
+user1 = User.create(username: "Albus Dumbledore",
               email: "dumbledore@hogwarts.edu",
               password: "123", 
               profile_img: "https://i.imgur.com/UYYZ0nQ.jpg")
-User.create(username: "Miles Morales",
+user2 = User.create(username: "Miles Morales",
               email: "spiderwho@gsnail.com",
               password: "123", 
               profile_img: "https://i.imgur.com/zhGH2hc.jpg")
-User.create(username: "Daria Morgendorffer",
+user3 = User.create(username: "Daria Morgendorffer",
               email: "ugh@daria.com",
               password: "123", 
               profile_img: "https://i.imgur.com/vBbpM8K.jpg")
-User.create(username: "Ahsoka Tano",
+user4 = User.create(username: "Ahsoka Tano",
               email: "notajedi@jedis.org",
               password: "123", 
               profile_img: "https://i.imgur.com/aE1u5o4.jpg")
-User.create(username: "Kal El",
+user5 = User.create(username: "Kal El",
               email: "dontworryaboutit@justiceleague.org",
               password: "123", 
               profile_img: "https://i.imgur.com/YQUrkjO.png")
-User.create(username: "Buffy Summers",
+user6 = User.create(username: "Buffy Summers",
               email: "ihatesunnydale@hellmouth.come",
               password: "123", 
               profile_img: "https://i.imgur.com/Z2Ume6T.jpg")
@@ -38,27 +38,33 @@ puts "Creating Ice Cream Shops..."
 shop1 = Shop.create(name: "Ample Hills Creamery", 
                     image_url: "https://i.imgur.com/aqMxpFK.png",
                     website: "https://www.amplehills.com/",
-                    plus_code: "M2HJ+CP Brooklyn, New York")
+                    lat: 40.678715,
+                    lng: -73.968316)
 shop2 = Shop.create(name: "Big Gay Ice Cream", 
                     image_url: "https://i.imgur.com/wFI5B9M.png",
                     website: "https://www.biggayicecream.com/",
-                    plus_code: "PX4W+VQ New York")
+                    lat: 40.707061, 
+                    lng: -74.003042)
 shop3 = Shop.create(name: "The Good Batch", 
                     image_url: "https://i.imgur.com/F0fxyN8.jpg",
                     website: "https://thegoodbatch.com/",
-                    plus_code: "M2MP+4Q Brooklyn, New York")
+                    lat: 40.682961,
+                    lng: -73.963257)
 shop4 = Shop.create(name: "Van Leeuwen", 
                     image_url: "https://i.imgur.com/CrQXH2O.jpg",
                     website: "https://vanleeuwenicecream.com/",
-                    plus_code: "P29Q+97 New York")
+                    lat: 40.718293,
+                    lng: -73.961891)
 shop5 = Shop.create(name: "Oddfellows Ice Cream Company", 
                     image_url: "https://i.imgur.com/G1A7jQn.png",
                     website: "https://www.oddfellowsnyc.com/",
-                    plus_code: "P235+73 Brooklyn, New York")
+                    lat: 40.703222,
+                    lng: -73.992312)
 shop6 = Shop.create(name: "Malai Ice Cream", 
                     image_url: "https://i.imgur.com/i0nBrwz.png",
                     website: "https://www.malai.co/",
-                    plus_code: "M2M4+3M Brooklyn, New York")
+                    lat: 40.682628, 
+                    lng: -73.993428)
 
 puts "Creating Reviews..."
 
@@ -179,26 +185,35 @@ end
 
 puts "Creating Conversations..."
 
-10.times do
-  sender_id = User.all.sample.id
-  if sender_id == User.last.id
-    sender_id = User.last.id - 2
-  end
-  Conversation.create(sender_id: sender_id, recipient_id: sender_id + 1)
-end
+convo1 = Conversation.create(sender_id: user1.id,
+                    recipient_id: user2.id)
+convo2 = Conversation.create(sender_id: user1.id,
+                    recipient_id: user4.id)
+convo3 = Conversation.create(sender_id: user5.id,
+                    recipient_id: user6.id)
+
 
 puts "Creating Messages..."
 
-10.times do
-  Message.create(content: Faker::Lorem.sentence,
-                 user_id: Conversation.sender_ids.sample,
-                 conversation: Conversation.all.sample)
-end
+Message.create(content: Faker::Lorem.sentence,
+                user: user1,
+                conversation: convo1)
+Message.create(content: Faker::Lorem.sentence,
+                user: user2,
+                conversation: convo1)
+Message.create(content: Faker::Lorem.sentence,
+                user: user1,
+                conversation: convo1)
+Message.create(content: Faker::Lorem.sentence,
+                user: user4,
+                conversation: convo2)
+Message.create(content: Faker::Lorem.sentence,
+                user: user5,
+                conversation: convo3)
+Message.create(content: Faker::Lorem.sentence,
+                user: user6,
+                conversation: convo3)
 
-10.times do
-  Message.create(content: Faker::Lorem.sentence,
-                 user_id: Conversation.recipient_ids.sample,
-                 conversation: Conversation.all.sample)
-end
+
 
 puts "Done!"

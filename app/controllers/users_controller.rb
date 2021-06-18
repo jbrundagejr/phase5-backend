@@ -30,11 +30,6 @@ class UsersController < ApplicationController
   
   def index
     @users = User.all
-    # user_array = @users.map do |user_instance|
-    #     { user: UserSerializer.new(user_instance),
-    #     token: encode_token({user_id: user_instance.id})}
-    # end
-    # render json: user_array
     render json: @users
   end
 
