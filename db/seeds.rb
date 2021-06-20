@@ -29,7 +29,7 @@ user5 = User.create(username: "Kal El",
               password: "123", 
               profile_img: "https://i.imgur.com/YQUrkjO.png")
 user6 = User.create(username: "Buffy Summers",
-              email: "ihatesunnydale@hellmouth.come",
+              email: "ihatesunnydale@hellmouth.com",
               password: "123", 
               profile_img: "https://i.imgur.com/Z2Ume6T.jpg")
 

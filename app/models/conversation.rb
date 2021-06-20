@@ -10,12 +10,4 @@ class Conversation < ApplicationRecord
       sender_id, recipient_id, recipient_id, sender_id)
   end
 
-  def self.sender_ids
-    self.all.map {|conversation_instance| conversation_instance.sender_id }
-  end
-
-  def self.recipient_ids
-    self.all.map {|conversation_instance| conversation_instance.recipient_id }
-  end
-
 end

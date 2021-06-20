@@ -48,6 +48,8 @@ class UsersController < ApplicationController
 
   def destroy
     @user = User.find(params[:id])
+    @user.sent_conversations.destroy_all
+    @user.received_conversations.destroy_all
     @user.destroy
   end
 
