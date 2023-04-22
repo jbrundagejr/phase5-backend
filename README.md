@@ -3,7 +3,7 @@
 To get this Rails Backend working, make sure you have the following on your system:
 
 -Ruby 2.7.8
--Postgres running on port 5342
+-Postgres running on port 5432
 
 To start the project run:
 
