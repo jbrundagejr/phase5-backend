@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '2.6.1'
+ruby '2.7.8'
 gem 'jwt'
 gem 'active_model_serializers'
 gem 'faker', :git => 'https://github.com/faker-ruby/faker.git', :branch => 'master'
