@@ -1,24 +1,22 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+To get this Rails Backend working, make sure you have the following on your system:
 
-Things you may want to cover:
+-Ruby 2.7.8
+-Postgres running on port 5342
 
-* Ruby version
+To start the project run:
 
-* System dependencies
+Create the database:
+`rails db:create 'phase5_backend_development'`
 
-* Configuration
+Migrate the db:
+`rails db:migrate`
 
-* Database creation
+Populate the database with content:
+`rails db:seed`
 
-* Database initialization
+Run the rails server:
+`rails server`
 
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+You should now have the successful rails message if you navigate to `http://localhost:3000`
