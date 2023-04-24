@@ -1,0 +1,19 @@
+databases:
+  - name: postgres
+    ipAllowList: []
+    databaseName: phase5_backend_development
+    user: phase5_backend_development
+
+services:
+  - type: web
+    name: phase5_backend_development
+    env: ruby
+    buildCommand: "./render-build.sh"
+    startCommand: "bundle exec rails s"
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: postgres
+          property: connectionString
+      - key: RAILS_MASTER_KEY
+        sync: false
